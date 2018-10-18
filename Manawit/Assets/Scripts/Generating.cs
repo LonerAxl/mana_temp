@@ -40,6 +40,7 @@ public class Generating : MonoBehaviour {
                 {
                     if (Globals.backupCube[i]!=null){
                         GameObject current = Globals.backupCube[i];
+
                         Globals.backupCube[i] = null;
 
                         current.GetComponent<BackupCube>().enabled = false;
@@ -95,10 +96,10 @@ public class Generating : MonoBehaviour {
         //handlind cube dropping
         for (int i = 0; i < 9; i++)
         {
-            List<GameObject> currCol = Globals.getCol(i);
+            List<GameObject> currCol = Globals.getColSortByDes(i);
             for(int j=0;j<currCol.Count;j++){
 
-                int gap = currCol[j].GetComponent<ElementCube>().row - j;
+                int gap = Globals.vectorToRow(currCol[j].GetComponent<ElementCube>().getDestination()) - j;
                 if ((!currCol[j].GetComponent<ElementCube>().isLocked) && gap >= 1)
                 {
                     for (int k = j; k < currCol.Count; k++)
@@ -259,7 +260,7 @@ public class Generating : MonoBehaviour {
     private void generateBackup(){
         for (int i = 0; i < 9; i++)
         {
-            if (Globals.backupCube[i] == null && Globals.CheckCubeNotExist(12,i))
+            if (Globals.backupCube[i] == null && Globals.CheckCubeNotExist(9,i))
             {
                 int randomInt = (int)Mathf.Round(Random.Range(0.0f, 5.0f));
                 GameObject instance = Instantiate(cubePrefab, cubePrefab.transform.position+new Vector3((float)i,0.0f,4.0f), cubePrefab.transform.rotation);

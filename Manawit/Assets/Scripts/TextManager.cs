@@ -12,6 +12,7 @@ public class TextManager : MonoBehaviour {
     private Text p1HP;
     private Text p2HP;
     private Text timeleft;
+    private Text win;
 	// Use this for initialization
 	void Start () {
         p1Inventory = new Text[]{
@@ -33,6 +34,7 @@ public class TextManager : MonoBehaviour {
         p1HP = this.gameObject.transform.Find("P1HP").gameObject.GetComponent<Text>();
         p2HP = this.gameObject.transform.Find("P2HP").gameObject.GetComponent<Text>();
         timeleft=this.gameObject.transform.Find("Timeleft").gameObject.GetComponent<Text>();
+        win=this.gameObject.transform.Find("Win").gameObject.GetComponent<Text>();
 	}
 	
 	// Update is called once per frame
@@ -41,9 +43,18 @@ public class TextManager : MonoBehaviour {
         {
             p1Inventory[i].text = player1.GetComponent<Player1>().inventory[i].ToString();
             p2Inventory[i].text = player2.GetComponent<Player2>().inventory[i].ToString();
-            p1HP.text = player1.GetComponent<Player1>().hp.ToString();
-            p2HP.text = player2.GetComponent<Player2>().hp.ToString();
-            timeleft.text = ((int)(manager.GetComponent<Generating>().time)).ToString();
+
+        }
+        p1HP.text = player1.GetComponent<Player1>().hp.ToString();
+        p2HP.text = player2.GetComponent<Player2>().hp.ToString();
+        timeleft.text = ((int)(manager.GetComponent<Generating>().time)).ToString();
+        if (player1.GetComponent<Player1>().hp <= 0)
+        {
+            win.text = "Player 2 Win!!!";
+        }
+        else if (player2.GetComponent<Player2>().hp <= 0)
+        {
+            win.text = "Player 1 Win!!!";
         }
 	}
 }

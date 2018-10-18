@@ -16,6 +16,7 @@ public class BackupCube : MonoBehaviour {
 		
 	}
 
+
 //    public void ChangeColor(){
 //        switch (type)
 //        {

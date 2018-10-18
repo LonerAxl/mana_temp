@@ -13,6 +13,7 @@ public class Player2 : MonoBehaviour {
     private int id;
     public int hp;
     public int[] inventory;
+    private bool flag;
     // Use this for initialization
     void Start () {
         id = 2;
@@ -31,43 +32,8 @@ public class Player2 : MonoBehaviour {
         bool pressRight = Input.GetKeyDown(KeyCode.RightArrow);
         bool pressSelect = Input.GetKeyDown(KeyCode.L);
 
-
-        if(!isSelect)
-        {
-            if (pressUp&&row<8)
-            {
-                this.gameObject.transform.Translate(this.gameObject.transform.rotation*new Vector3(0.0f, 0.0f, 1.0f));
-            }
-            if (pressDown&&row>0)
-            {
-                this.gameObject.transform.Translate(this.gameObject.transform.rotation*new Vector3(0.0f, 0.0f, -1.0f));
-            }
-            if (pressLeft&&col>0)
-            {
-                this.gameObject.transform.Translate(this.gameObject.transform.rotation*new Vector3(-1.0f, 0.0f, 0.0f));
-            }
-            if (pressRight&&col<8)
-            {
-                this.gameObject.transform.Translate(this.gameObject.transform.rotation*new Vector3(1.0f, 0.0f, 0.0f));
-            }
-            if (pressSelect)
-            {
-                isSelect = true;
-                GameObject instance1 = Instantiate(pipePrefab, this.gameObject.transform.position+new Vector3(0.0f,0.0f,1.0f), this.gameObject.transform.rotation);
-                GameObject instance2 = Instantiate(pipePrefab, this.gameObject.transform.position+new Vector3(0.0f,0.0f,-1.0f), this.gameObject.transform.rotation);
-                GameObject instance3 = Instantiate(pipePrefab, this.gameObject.transform.position+new Vector3(1.0f,0.0f,0.0f), this.gameObject.transform.rotation);
-                GameObject instance4 = Instantiate(pipePrefab, this.gameObject.transform.position+new Vector3(-1.0f,0.0f,0.0f), this.gameObject.transform.rotation);
-
-                selection[0] = instance1;
-                selection[1] = instance2;
-                selection[2] = instance3;
-                selection[3] = instance4;
-                foreach (GameObject pipe in selection)
-                {
-                    pipe.GetComponent<Renderer>().material.color = new Color((float)102/255,(float)204/255,1.0f,1.0f);
-                }
-            }
-        }else
+        flag = false;
+        if(isSelect)
         {
             int tmpRow = 0;
             int tmpCol = 0;
@@ -93,10 +59,44 @@ public class Player2 : MonoBehaviour {
             if (pressSelect||pressUp||pressDown||pressLeft||pressRight)
             {
                 isSelect = false;
+                flag = true;
                 for (int i = 0; i < 4; i++)
                 {
                     Destroy(selection[i]);
                 }
+            }
+        }
+        if(!isSelect)
+        {
+
+            if (pressUp&&row<8)
+            {
+                this.gameObject.transform.Translate(this.gameObject.transform.rotation*new Vector3(0.0f, 0.0f, 1.0f));
+            }
+            if (pressDown&&row>0)
+            {
+                this.gameObject.transform.Translate(this.gameObject.transform.rotation*new Vector3(0.0f, 0.0f, -1.0f));
+            }
+            if (pressLeft&&col>0)
+            {
+                this.gameObject.transform.Translate(this.gameObject.transform.rotation*new Vector3(-1.0f, 0.0f, 0.0f));
+            }
+            if (pressRight&&col<8)
+            {
+                this.gameObject.transform.Translate(this.gameObject.transform.rotation*new Vector3(1.0f, 0.0f, 0.0f));
+            }
+            if (pressSelect&&!flag)
+            {
+                isSelect = true;
+                GameObject instance1 = Instantiate(pipePrefab, this.gameObject.transform.position+new Vector3(0.0f,0.0f,1.0f), this.gameObject.transform.rotation);
+                GameObject instance2 = Instantiate(pipePrefab, this.gameObject.transform.position+new Vector3(0.0f,0.0f,-1.0f), this.gameObject.transform.rotation);
+                GameObject instance3 = Instantiate(pipePrefab, this.gameObject.transform.position+new Vector3(1.0f,0.0f,0.0f), this.gameObject.transform.rotation);
+                GameObject instance4 = Instantiate(pipePrefab, this.gameObject.transform.position+new Vector3(-1.0f,0.0f,0.0f), this.gameObject.transform.rotation);
+                selection[0] = instance1;
+                selection[1] = instance2;
+                selection[2] = instance3;
+                selection[3] = instance4;
+
             }
         }
         col = Mathf.RoundToInt((float)(this.gameObject.transform.position.x+3.5));

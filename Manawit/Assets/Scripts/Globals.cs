@@ -24,7 +24,7 @@ public static class Globals {
         return null;
     }
 
-    public static bool CheckCubeNotExist(int row,int col) {
+    public static bool CheckCubeNotExist(int rowl,int col) {
         if (cubeList.Count == 0)
         {
             return true;
@@ -32,7 +32,7 @@ public static class Globals {
 
         foreach (GameObject cube in cubeList)
         {
-            if (cube.GetComponent<ElementCube>().col==col && cube.GetComponent<ElementCube>().row==row) {
+            if (cube.GetComponent<ElementCube>().col==col && cube.GetComponent<ElementCube>().row>=rowl) {
 
                 return false;
             }
@@ -188,5 +188,21 @@ public static class Globals {
         return result;
     }
 
+    public static List<GameObject> getColSortByDes(int col){
+        List<GameObject> result = new List<GameObject>();
+        for (int i = 0; i < cubeList.Count; i++) {
+            if (cubeList[i].GetComponent<ElementCube>().col==col) {
+                result.Add(cubeList[i]);
+            }
+        }
+        result.Sort(delegate(GameObject x, GameObject y)
+            {
+                return x.GetComponent<ElementCube>().getDestination().z.CompareTo(y.GetComponent<ElementCube>().getDestination().z);
+            });
+        return result;
+    }
 
+    public static int vectorToRow(Vector3 pos){
+        return Mathf.RoundToInt((float)(pos.z+3));
+    }
 }
