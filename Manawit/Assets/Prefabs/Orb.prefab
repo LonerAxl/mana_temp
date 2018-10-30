@@ -37,7 +37,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4651540591368934}
   - component: {fileID: 114606382503680050}
-  - component: {fileID: 114503266443038770}
   m_Layer: 0
   m_Name: Orb
   m_TagString: Untagged
@@ -114,20 +113,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1325268922888038}
   m_Mesh: {fileID: 4300000, guid: 6e1e74893c2b1b9408d05e8dd6a646c0, type: 3}
---- !u!114 &114503266443038770
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1953482699019738}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1692bc44246a6744a9056b1fa812c425, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  row: 0
-  col: 0
 --- !u!114 &114606382503680050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -139,9 +124,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f427c4f4030ec248a33d1f5fc9b1219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
   speed: 10
-  isLocked: 0
-  row: 0
-  col: 0
   generatingManager: {fileID: 0}
