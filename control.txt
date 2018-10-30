@@ -1,0 +1,13 @@
+use wasd to control player 1 (white)
+use arrow keys to control player 2 (black)
+player 1 press space to select a block, then use wasd to swap with the adjacent blocks
+player 2 press L to select a block, then use arrow keys to swap with the adjacent blocks
+press G to generate the puzzle
+press J to quit
+
+
+minor bugs may appear, please ignore them.(?) and report to Axl.
+
+Current known bugs:
+
+
